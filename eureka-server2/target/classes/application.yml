@@ -1,0 +1,24 @@
+server:
+  port: 10087
+spring:
+  application:
+    name: eurakeserver2
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://server2:10087/eureka/
+  instance:
+    hostname: server2
+
+# actuator 配置，实现eureka优雅停服
+management:
+  endpoints:
+    web:
+      exposure:
+        include: shutdown # 暴露停止服务的接口地址
+  endpoint:
+    shutdown:
+      enabled: true # 确认要开启 shutdown 停止服务的接口服务
+
